@@ -23,6 +23,7 @@ import {
   PiSnowflakeThin,
   PiThermometerThin,
 } from "react-icons/pi"
+import Popup from "./Popup"
 
 type ProductType = {
   image: string
@@ -71,7 +72,7 @@ export default function Product({
         <Drawer>
           <div className="flex w-full flex-col-reverse lg:flex-row lg:justify-between pb-6">
             <div className="px-4 py-2 border rounded-md bg-primary text-primary-foreground text-center">
-              Objednat
+              <Popup name={name} desc={desc} />
             </div>
             <DrawerTrigger>
               <div className="w-full mb-2 lg:mb-0 px-4 py-2 border rounded-md">
