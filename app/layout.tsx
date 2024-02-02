@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import { Roboto as FontSans } from "next/font/google"
 import "../styles/globals.css"
 import { cn } from "../lib/utils"
+import Nav from "@/components/Nav"
+import Footer from "@/components/Footer"
 
 const fontSans = FontSans({
   weight: ["300", "400", "500", "700"],
@@ -28,7 +30,9 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
+        <Nav />
         {children}
+        <Footer />
       </body>
     </html>
   )

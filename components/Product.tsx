@@ -53,7 +53,7 @@ export default function Product({
       </CardHeader>
       <CardTitle>{name}</CardTitle>
       <CardContent>
-        <div className="flex  flex-col my-2 text-lg">
+        <div className="flex flex-col items-center my-2 xl:text-lg">
           <div className="flex">
             <span className="mr-2 text-sky-400 text-2xl">
               {desc === "mražené" ? <PiSnowflakeThin /> : <PiThermometerThin />}
@@ -88,8 +88,8 @@ export default function Product({
               <DrawerDescription>
                 <div className="flex justify-center w-full flex-col items-center">
                   <Image src={image} alt={name} width={320} height={320} />
-                  <div className="mt-8">
-                    <div className="flex items-center flex-col my-2 text-lg">
+                  <div className="mt-6">
+                    <div className="flex justify-between my-2 xl:text-lg">
                       <div className="flex">
                         <span className="mr-2 text-sky-400 text-2xl">
                           {desc === "mražené" ? (
