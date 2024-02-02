@@ -1,8 +1,12 @@
 import Product from "@/components/Product"
+import AlertBox from "@/components/AlertBox"
 
 export default function Home() {
   return (
     <main className="px-2 sm:px-4 md:px-8 xl:px-24">
+      <div className="my-2 lg:my-4">
+        <AlertBox />
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2">
         <Product
           image="/chicken.jpg"
