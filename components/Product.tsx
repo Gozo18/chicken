@@ -71,9 +71,7 @@ export default function Product({
       <CardFooter>
         <Drawer>
           <div className="flex w-full flex-col-reverse lg:flex-row lg:justify-between pb-6">
-            <div className="px-4 py-2 border rounded-md bg-primary text-primary-foreground text-center">
-              <Popup name={name} desc={desc} />
-            </div>
+            <Popup name={name} desc={desc} />
             <DrawerTrigger>
               <div className="w-full mb-2 lg:mb-0 px-4 py-2 border rounded-md">
                 Podrobnosti
