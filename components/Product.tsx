@@ -19,11 +19,17 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
+import {
+  PiPackageThin,
+  PiSnowflakeThin,
+  PiThermometerThin,
+} from "react-icons/pi"
 
 type ProductType = {
   image: string
   name: string
   desc: string
+  pack: string
   code: string
   weight: string
 }
@@ -32,6 +38,7 @@ export default function Product({
   image,
   name,
   desc,
+  pack,
   code,
   weight,
 }: ProductType) {
@@ -46,7 +53,20 @@ export default function Product({
       </CardHeader>
       <CardTitle>{name}</CardTitle>
       <CardContent>
-        <p className="my-2">{desc}</p>
+        <div className="flex  flex-col my-2 text-lg">
+          <div className="flex">
+            <span className="mr-2 text-sky-400 text-2xl">
+              {desc === "mražené" ? <PiSnowflakeThin /> : <PiThermometerThin />}
+            </span>
+            <span>{desc}</span>
+          </div>
+          <div className="flex">
+            <span className="mr-2 text-2xl">
+              <PiPackageThin />
+            </span>
+            <span>{pack}</span>
+          </div>
+        </div>
       </CardContent>
       <CardFooter>
         <Drawer>
@@ -69,6 +89,24 @@ export default function Product({
                 <div className="flex justify-center w-full flex-col items-center">
                   <Image src={image} alt={name} width={320} height={320} />
                   <div className="mt-8">
+                    <div className="flex items-center flex-col my-2 text-lg">
+                      <div className="flex">
+                        <span className="mr-2 text-sky-400 text-2xl">
+                          {desc === "mražené" ? (
+                            <PiSnowflakeThin />
+                          ) : (
+                            <PiThermometerThin />
+                          )}
+                        </span>
+                        <span>{desc}</span>
+                      </div>
+                      <div className="flex">
+                        <span className="mr-2 text-2xl">
+                          <PiPackageThin />
+                        </span>
+                        <span>{pack}</span>
+                      </div>
+                    </div>
                     <Table>
                       <TableBody>
                         <TableRow>

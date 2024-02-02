@@ -18,28 +18,32 @@ export default function Home() {
         <Product
           image="/chicken.jpg"
           name="Kuře celé"
-          desc="chlazené, vakuum/sáček"
+          desc="chlazené"
+          pack="vakuum/sáček"
           code="k90"
           weight="1,5-2,9 kg"
         />
         <Product
           image="/freezedchicken.jpg"
           name="Kuře celé"
-          desc="mražené, vakuum/sáček"
+          desc="mražené"
+          pack="vakuum/sáček"
           code="k90"
           weight="1,5-2,9 kg"
         />
         <Product
           image="/breasts.jpg"
           name="Kuřecí prsní řízky SUPREME po 2"
-          desc="chlazené, vakuum/sáček"
+          desc="chlazené"
+          pack="vakuum/sáček"
           code="k116"
           weight="0,4-1,1 kg"
         />
         <Product
           image="/freezedbreasts.jpg"
           name="Kuřecí prsní řízky SUPREME po 2"
-          desc="mražené, vakuum/sáček"
+          desc="mražené"
+          pack="vakuum/sáček"
           code="k116"
           weight="0,4-1,1 kg"
         />
