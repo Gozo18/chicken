@@ -18,7 +18,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table"
 import {
   PiPackageThin,
   PiSnowflakeThin,
@@ -54,13 +53,13 @@ export default function Product({
       <CardTitle>{name}</CardTitle>
       <CardContent>
         <div className="flex flex-col items-center my-2 xl:text-lg">
-          <div className="flex">
+          <div className="flex my-1 lg:my-2">
             <span className="mr-2 text-sky-400 text-2xl">
               {desc === "mražené" ? <PiSnowflakeThin /> : <PiThermometerThin />}
             </span>
             <span>{desc}</span>
           </div>
-          <div className="flex">
+          <div className="flex my-1 lg:my-2">
             <span className="mr-2 text-2xl">
               <PiPackageThin />
             </span>
@@ -88,10 +87,10 @@ export default function Product({
               <DrawerDescription>
                 <div className="flex justify-center w-full flex-col items-center">
                   <Image src={image} alt={name} width={320} height={320} />
-                  <div className="mt-6">
-                    <div className="flex justify-between my-2 xl:text-lg">
+                  <div className="mt-6 w-80">
+                    <div className="flex justify-between xl:text-lg">
                       <div className="flex">
-                        <span className="mr-2 text-sky-400 text-2xl">
+                        <span className="relative bottom-1 mr-2 text-sky-400 text-2xl">
                           {desc === "mražené" ? (
                             <PiSnowflakeThin />
                           ) : (
@@ -101,34 +100,26 @@ export default function Product({
                         <span>{desc}</span>
                       </div>
                       <div className="flex">
-                        <span className="mr-2 text-2xl">
+                        <span className="relative bottom-1 mr-2 text-2xl">
                           <PiPackageThin />
                         </span>
                         <span>{pack}</span>
                       </div>
                     </div>
-                    <Table>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell className="font-medium">
-                            Objednací číslo:
-                          </TableCell>
-                          <TableCell>{code}</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">
-                            Dostupnost:
-                          </TableCell>
-                          <TableCell> ihned k odběru</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell className="font-medium">
-                            Hmotnost od-do:
-                          </TableCell>
-                          <TableCell>{weight}</TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
+                    <div className="my-4 w-full divide-y divide-solid">
+                      <div className="flex justify-between w-full py-2">
+                        <span>Objednací číslo:</span>
+                        <span>{code}</span>
+                      </div>
+                      <div className="flex justify-between w-full py-2">
+                        <span>Dostupnost:</span>
+                        <span>ihned k odběru</span>
+                      </div>
+                      <div className="flex justify-between w-full py-2">
+                        <span>Hmotnost od-do:</span>
+                        <span>{weight}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </DrawerDescription>
