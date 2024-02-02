@@ -3,7 +3,7 @@ import AlertBox from "@/components/AlertBox"
 
 export default function Home() {
   return (
-    <main className="mt-20 lg:mt-28 px-2 sm:px-4 md:px-8 xl:px-24">
+    <main className="mt-20 lg:mt-32 px-2 sm:px-4 md:px-8 xl:px-24">
       <div className="my-2 lg:my-4">
         <AlertBox />
       </div>
