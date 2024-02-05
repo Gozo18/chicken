@@ -1,5 +1,6 @@
 import Image from "next/image"
-import { PiUser, PiShoppingCartSimple } from "react-icons/pi"
+import { PiUser } from "react-icons/pi"
+import Basket from "./Basket"
 
 export default function Nav() {
   return (
@@ -13,7 +14,7 @@ export default function Nav() {
           <PiUser />
         </span>
         <span className="ml-6">
-          <PiShoppingCartSimple />
+          <Basket />
         </span>
       </div>
     </nav>

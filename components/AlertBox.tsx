@@ -29,7 +29,7 @@ export default function AlertBox() {
           <div className="py-2 border opacity-60 text-center">2.týden</div>
           <div className="py-2 border opacity-60 text-center">3.týden</div>
           <div className="py-2 border opacity-60 text-center">4.týden</div>
-          <div className="py-2 border text-center bg-primary text-primary-foreground text-center">
+          <div className="py-2 border text-center bg-primary text-primary-foreground">
             5.týden
           </div>
         </div>
