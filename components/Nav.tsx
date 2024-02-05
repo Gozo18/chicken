@@ -13,7 +13,7 @@ export default function Nav() {
         <span className="ml-6">
           <PiUser />
         </span>
-        <span className="ml-6">
+        <span className="ml-6 mr-3 md:mr-0">
           <Basket />
         </span>
       </div>

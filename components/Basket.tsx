@@ -47,7 +47,7 @@ export default function Basket() {
                       <PiMinusSquareThin />
                     </div>
                     <div className="relative top-1">
-                      <Input value={20} type="number" />
+                      <Input value={20} />
                     </div>
                     <div className="ml-2 text-5xl">
                       <PiPlusSquareThin />
@@ -73,7 +73,7 @@ export default function Basket() {
                       <PiMinusSquareThin />
                     </div>
                     <div className="relative top-1">
-                      <Input value={13} type="number" />
+                      <Input value={13} />
                     </div>
                     <div className="ml-2 text-5xl">
                       <PiPlusSquareThin />
