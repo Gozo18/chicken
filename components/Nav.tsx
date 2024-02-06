@@ -1,6 +1,6 @@
 import Image from "next/image"
-import { PiUser } from "react-icons/pi"
 import Basket from "./Basket"
+import User from "./User"
 
 export default function Nav() {
   return (
@@ -11,7 +11,7 @@ export default function Nav() {
       </h1>
       <div className="flex text-4xl items-center">
         <span className="ml-6">
-          <PiUser />
+          <User />
         </span>
         <span className="ml-6 mr-3 md:mr-0">
           <Basket />
