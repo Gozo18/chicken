@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image"
 import {
   Sheet,
@@ -17,6 +20,37 @@ import {
 } from "react-icons/pi"
 
 export default function Basket() {
+  const [value1, setValue1] = useState(20)
+  const [value2, setValue2] = useState(13)
+
+  const add1 = () => {
+    setValue1(value1 + 1)
+  }
+
+  const minus1 = () => {
+    if (value1 != 0) {
+      setValue1(value1 - 1)
+    }
+  }
+
+  const add2 = () => {
+    setValue2(value2 + 1)
+  }
+
+  const minus2 = () => {
+    if (value2 != 0) {
+      setValue2(value2 - 1)
+    }
+  }
+
+  const valueChange1 = (e: any) => {
+    setValue1(Number(e.target.value))
+  }
+
+  const valueChange2 = (e: any) => {
+    setValue2(Number(e.target.value))
+  }
+
   return (
     <Sheet>
       <SheetTrigger className="relative">
@@ -39,6 +73,7 @@ export default function Basket() {
                       src="/chicken.jpg"
                       alt="kuře celé"
                       fill={true}
+                      sizes="60px"
                       style={{ objectFit: "cover" }}
                     />
                   </div>
@@ -47,13 +82,24 @@ export default function Basket() {
                       Kuře celé
                     </div>
                     <div className="flex">
-                      <div className="mr-2 text-5xl">
+                      <div
+                        className="mr-2 text-5xl cursor-pointer"
+                        onClick={minus1}
+                      >
                         <PiMinusSquareThin />
                       </div>
                       <div className="relative top-1">
-                        <Input tabIndex={-1} value={20} />
+                        <Input
+                          tabIndex={-1}
+                          value={value1}
+                          type="number"
+                          onChange={valueChange1}
+                        />
                       </div>
-                      <div className="ml-2 text-5xl">
+                      <div
+                        className="ml-2 text-5xl cursor-pointer"
+                        onClick={add1}
+                      >
                         <PiPlusSquareThin />
                       </div>
                     </div>
@@ -68,6 +114,7 @@ export default function Basket() {
                       src="/breasts.jpg"
                       alt="KUŘECÍ PRSNÍ ŘÍZKY SUPREME PO 2"
                       fill={true}
+                      sizes="60px"
                       style={{ objectFit: "cover" }}
                     />
                   </div>
@@ -76,13 +123,24 @@ export default function Basket() {
                       Kuřecí prsní řízky supreme po 2
                     </div>
                     <div className="flex">
-                      <div className="mr-2 text-5xl">
+                      <div
+                        className="mr-2 text-5xl cursor-pointer"
+                        onClick={minus2}
+                      >
                         <PiMinusSquareThin />
                       </div>
                       <div className="relative top-1">
-                        <Input tabIndex={-1} value={13} />
+                        <Input
+                          tabIndex={-1}
+                          value={value2}
+                          type="number"
+                          onChange={valueChange2}
+                        />
                       </div>
-                      <div className="ml-2 text-5xl">
+                      <div
+                        className="ml-2 text-5xl cursor-pointer"
+                        onClick={add2}
+                      >
                         <PiPlusSquareThin />
                       </div>
                     </div>

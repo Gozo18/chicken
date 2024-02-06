@@ -32,11 +32,13 @@ export default function Popup({ name, desc }: PopupType) {
               ?
             </div>
           </DialogTitle>
-          <DialogDescription>
-            <div className="my-6">Zadejte počet kusů a potvrďte.</div>
-            <Input type="number" placeholder="Počet kusů" />
-            <div className="w-full mt-6 mb-8 px-4 py-3 border rounded-md bg-primary text-primary-foreground text-center cursor-pointer">
-              Objednat
+          <DialogDescription asChild>
+            <div>
+              <div className="my-6">Zadejte počet kusů a potvrďte.</div>
+              <Input type="number" placeholder="Počet kusů" />
+              <div className="w-full mt-6 mb-8 px-4 py-3 border rounded-md bg-primary text-primary-foreground text-center cursor-pointer">
+                Objednat
+              </div>
             </div>
           </DialogDescription>
         </DialogHeader>

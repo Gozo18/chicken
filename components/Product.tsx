@@ -83,7 +83,7 @@ export default function Product({
               <DrawerTitle>
                 {name} - {desc}
               </DrawerTitle>
-              <DrawerDescription>
+              <DrawerDescription asChild>
                 <div className="flex justify-center w-full flex-col items-center">
                   <Image src={image} alt={name} width={320} height={320} />
                   <div className="mt-6 w-80">

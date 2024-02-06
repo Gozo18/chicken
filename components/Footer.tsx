@@ -8,7 +8,13 @@ export default function Footer() {
         <li className="mb-4">O nás</li>
         <li className="mb-4">Kontakty</li>
       </ul>
-      <Image src="/footerlogo.svg" alt="logo" width={120} height={120} />
+      <Image
+        src="/footerlogo.svg"
+        alt="logo"
+        width={0}
+        height={0}
+        style={{ width: "120px", height: "auto" }}
+      />
     </footer>
   )
 }
