@@ -39,73 +39,79 @@ import {
 const data: Payment[] = [
   {
     id: "m5gr84i9",
-    Cena: "úroveň 1",
-    Adresa: "Budějovice 12",
-    Zákazník: "Krámek Budějovice",
+    Cena: 140,
+    Popis: "chlazené",
+    Produkt: "Kuře celé",
   },
   {
     id: "3u1reuv4",
-    Cena: "úroveň 2",
-    Adresa: "Sušice 166",
-    Zákazník: "Bio Sušice",
+    Cena: 150,
+    Popis: "mražené",
+    Produkt: "Kuře celé",
   },
   {
     id: "derv1ws0",
-    Cena: "úroveň 1",
-    Adresa: "Pražská 13, Praha 5",
-    Zákazník: "Pražský obchod",
+    Cena: 130,
+    Popis: "chlazené",
+    Produkt: "Kuřecí prsní řízky SUPREME po 2",
   },
   {
     id: "5kma53ae",
-    Cena: "úroveň 3",
-    Adresa: "Klatovy 18",
-    Zákazník: "Klatovské bistro",
+    Cena: 115,
+    Popis: "mražené",
+    Produkt: "Kuřecí prsní řízky SUPREME po 2",
   },
   {
     id: "bhqecj4p",
-    Cena: "úroveň 1",
-    Adresa: "Pivní 12, Plzeň",
-    Zákazník: "PlzeňBio",
+    Cena: 120,
+    Popis: "chlazená",
+    Produkt: "Kuřecí stehna",
   },
 ]
 
 export type Payment = {
   id: string
-  Cena: string
-  Adresa: string
-  Zákazník: string
+  Cena: number
+  Popis: string
+  Produkt: string
 }
 
 export const columns: ColumnDef<Payment>[] = [
   {
-    accessorKey: "Zákazník",
+    accessorKey: "Produkt",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Zákazník
+          Produkt
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="">{row.getValue("Zákazník")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("Produkt")}</div>,
   },
   {
-    accessorKey: "Adresa",
-    header: "Adresa",
+    accessorKey: "Popis",
+    header: "Popis",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("Adresa")}</div>
+      <div className="capitalize">{row.getValue("Popis")}</div>
     ),
   },
   {
     accessorKey: "Cena",
     header: () => <div className="text-right">Cena</div>,
     cell: ({ row }) => {
-      return (
-        <div className="text-right font-medium">{row.getValue("Cena")}</div>
-      )
+      const amount = parseFloat(row.getValue("Cena"))
+
+      // Format the amount as a dollar amount
+      const formatted = new Intl.NumberFormat("cs-CS", {
+        style: "currency",
+        currency: "CZK",
+      }).format(amount)
+
+      return <div className="text-right font-medium">{formatted}</div>
     },
   },
   {
@@ -127,10 +133,10 @@ export const columns: ColumnDef<Payment>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(payment.id)}
             >
-              Úprava zákazníka
+              Úprava produktu
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Detail zákazníka</DropdownMenuItem>
+            <DropdownMenuItem>Detail produktu</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
@@ -138,7 +144,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ]
 
-export default function AdminCustomers() {
+export default function AdminProducts() {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -168,7 +174,7 @@ export default function AdminCustomers() {
 
   return (
     <section className="w-full my-4 p-2 border rounded-md">
-      <h2 className="text-2xl font-semibold text-center">Zákazníci</h2>
+      <h2 className="text-2xl font-semibold text-center">Produkty</h2>
       <div className="w-full">
         <div className="flex items-center py-4">
           <Input
