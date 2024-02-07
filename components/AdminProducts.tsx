@@ -180,10 +180,10 @@ export default function AdminProducts() {
           <Input
             placeholder="Filtrovat produkty..."
             value={
-              (table.getColumn("Zákazník")?.getFilterValue() as string) ?? ""
+              (table.getColumn("Produkt")?.getFilterValue() as string) ?? ""
             }
             onChange={(event) =>
-              table.getColumn("Zákazník")?.setFilterValue(event.target.value)
+              table.getColumn("Produkt")?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
           />
