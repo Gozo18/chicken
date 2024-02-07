@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Footer() {
   return (
@@ -7,14 +8,19 @@ export default function Footer() {
         <li className="mb-4">Přihlášení</li>
         <li className="mb-4">O nás</li>
         <li className="mb-4">Kontakty</li>
+        <li className="mb-4">
+          <Link href="/admin">Administrace</Link>
+        </li>
       </ul>
-      <Image
-        src="/footerlogo.svg"
-        alt="logo"
-        width={0}
-        height={0}
-        style={{ width: "120px", height: "auto" }}
-      />
+      <Link href="/">
+        <Image
+          src="/footerlogo.svg"
+          alt="logo"
+          width={0}
+          height={0}
+          style={{ width: "120px", height: "auto" }}
+        />
+      </Link>
     </footer>
   )
 }
