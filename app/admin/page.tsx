@@ -1,3 +1,4 @@
+import AdminCustomers from "@/components/AdminCustomers"
 import AdminOrders from "@/components/AdminOrders"
 import AdminOverview from "@/components/AdminOverview"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -30,7 +31,7 @@ export default function admin() {
           <AdminOrders />
         </TabsContent>
         <TabsContent value="customers">
-          <h2>Zákazníci</h2>
+          <AdminCustomers />
         </TabsContent>
         <TabsContent value="products">
           <h2>Produkty</h2>
