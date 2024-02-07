@@ -178,7 +178,7 @@ export default function AdminProducts() {
       <div className="w-full">
         <div className="flex items-center py-4">
           <Input
-            placeholder="Filtrovat zákazníky..."
+            placeholder="Filtrovat produkty..."
             value={
               (table.getColumn("Zákazník")?.getFilterValue() as string) ?? ""
             }

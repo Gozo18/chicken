@@ -35,7 +35,7 @@ export default function AdminOverview() {
           <h3 className="mb-2 text-lg font-semibold text-center">
             Aktuální objednávky
           </h3>
-          <div className="w-full h-96">
+          <div className="w-full h-auto lg:h-96">
             <AdminTable />
           </div>
         </div>

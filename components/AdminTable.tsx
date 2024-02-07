@@ -19,7 +19,7 @@ export default function AdminTable() {
         </TableRow>
       </TableHeader>
       <TableBody className="text-sm">
-        <TableRow>
+        <TableRow className="bg-slate-100">
           <TableCell className="py-2 px-1">7.2.2024</TableCell>
           <TableCell className="py-2 px-1">14.2.2024</TableCell>
           <TableCell className="py-2 px-1">Krámek Budějovice</TableCell>
@@ -31,7 +31,7 @@ export default function AdminTable() {
           <TableCell className="py-2 px-1">Krámek Budějovice</TableCell>
           <TableCell className="text-right py-2 px-1">2500,- Kč</TableCell>
         </TableRow>
-        <TableRow>
+        <TableRow className="bg-slate-100">
           <TableCell className="py-2 px-1">7.2.2024</TableCell>
           <TableCell className="py-2 px-1">14.2.2024</TableCell>
           <TableCell className="py-2 px-1">Krámek Budějovice</TableCell>
@@ -43,7 +43,31 @@ export default function AdminTable() {
           <TableCell className="py-2 px-1">Krámek Budějovice</TableCell>
           <TableCell className="text-right py-2 px-1">2500,- Kč</TableCell>
         </TableRow>
+        <TableRow className="bg-slate-100">
+          <TableCell className="py-2 px-1">23.12.2023</TableCell>
+          <TableCell className="py-2 px-1">30.12.2023</TableCell>
+          <TableCell className="py-2 px-1">Krámek Budějovice</TableCell>
+          <TableCell className="text-right py-2 px-1">2500,- Kč</TableCell>
+        </TableRow>
         <TableRow>
+          <TableCell className="py-2 px-1">23.12.2023</TableCell>
+          <TableCell className="py-2 px-1">30.12.2023</TableCell>
+          <TableCell className="py-2 px-1">Krámek Budějovice</TableCell>
+          <TableCell className="text-right py-2 px-1">2500,- Kč</TableCell>
+        </TableRow>
+        <TableRow className="bg-slate-100">
+          <TableCell className="py-2 px-1">23.12.2023</TableCell>
+          <TableCell className="py-2 px-1">30.12.2023</TableCell>
+          <TableCell className="py-2 px-1">Krámek Budějovice</TableCell>
+          <TableCell className="text-right py-2 px-1">2500,- Kč</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell className="py-2 px-1">23.12.2023</TableCell>
+          <TableCell className="py-2 px-1">30.12.2023</TableCell>
+          <TableCell className="py-2 px-1">Krámek Budějovice</TableCell>
+          <TableCell className="text-right py-2 px-1">2500,- Kč</TableCell>
+        </TableRow>
+        <TableRow className="bg-slate-100">
           <TableCell className="py-2 px-1">23.12.2023</TableCell>
           <TableCell className="py-2 px-1">30.12.2023</TableCell>
           <TableCell className="py-2 px-1">Krámek Budějovice</TableCell>
