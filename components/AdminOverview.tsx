@@ -31,7 +31,7 @@ export default function AdminOverview() {
             <AdminChart />
           </div>
         </div>
-        <div className="mt-2 lg:mb-0 p-2 border rounded-md">
+        <div className="mt-2 lg:mt-0 p-2 border rounded-md">
           <h3 className="mb-2 text-lg font-semibold text-center">
             Aktuální objednávky
           </h3>

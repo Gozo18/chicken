@@ -7,9 +7,7 @@ import User from "./User"
 import { usePathname } from "next/navigation"
 
 export default function Nav() {
-  const router = usePathname()
-
-  console.log(router)
+  const path = usePathname()
 
   return (
     <nav className="fixed top-0 left-0 right-0 flex justify-between py-2 lg:pt-10 lg:pb-4 px-2 sm:px-4 md:px-8 xl:px-24 bg-background z-10">
@@ -25,7 +23,7 @@ export default function Nav() {
           <span className="hidden">Farma Loužná</span>
         </Link>
       </h1>
-      {router != "/admin" ? (
+      {path != "/admin" ? (
         <div className="flex text-4xl items-center">
           <>
             <span className="ml-6">
