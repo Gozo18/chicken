@@ -18,7 +18,7 @@ export default function Nav() {
             alt="logo"
             width={0}
             height={0}
-            style={{ width: "120px", height: "auto" }}
+            style={{ width: "140px", height: "auto" }}
             priority={true}
           />
         </Link>

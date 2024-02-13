@@ -10,7 +10,7 @@ export default function Home() {
       <h1 className="mb-2 lg:mb-4 text-center font-semibold text-xl">
         Farma Loužná
       </h1>
-      <p className="mb-2 lg:mb-4 text-center opacity-80">
+      <p className="mb-2 lg:mb-4 p-2 lg:p-4 text-center text-sm lg:text-base opacity-80 border">
         Jsme malou rodinnou farmou, která je díky způsobu chovu na českém trhu
         ojedinělá. Zabýváme se chovem kuřat a následným zpracováním kvalitního
         kuřecího masa, které neobsahuje žádná antibiotika.
@@ -18,7 +18,7 @@ export default function Home() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
         <Link
           href="/eshop"
-          className="relative w-full h-96 rounded-md overflow-hidden"
+          className="relative w-full h-80 lg:h-96 rounded-md overflow-hidden border"
         >
           <Image
             src="/chicken.jpg"
@@ -33,7 +33,7 @@ export default function Home() {
         </Link>
         <Link
           href="/nase-kurata"
-          className="relative w-full h-96 rounded-md overflow-hidden"
+          className="relative w-full h-80 lg:h-96 rounded-md overflow-hidden border"
         >
           <Image
             src="/ourchickens.jpg"
@@ -48,7 +48,7 @@ export default function Home() {
         </Link>
         <Link
           href="/kontakty"
-          className="relative w-full h-96 rounded-md overflow-hidden"
+          className="relative w-full h-80 lg:h-96 rounded-md overflow-hidden border"
         >
           <Image
             src="/contacts.jpg"
