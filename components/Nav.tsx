@@ -26,17 +26,21 @@ export default function Nav() {
           <div className="flex text-4xl items-center">
             <>
               {path != "/eshop" ? (
-                <span className="ml-6 mr-3 md:mr-0">
+                <div className="flex flex-col items-center ml-6 mr-3 md:mr-0">
                   <User />
-                </span>
+                  <span className="text-xs opacity-80">From czech s.r.o.</span>
+                </div>
               ) : (
                 <>
-                  <span className="ml-6">
+                  <div className="flex flex-col items-center ml-6 mr-3 md:mr-0">
                     <User />
-                  </span>
-                  <span className="ml-6 mr-3 md:mr-0">
+                    <span className="text-xs opacity-80">
+                      From czech s.r.o.
+                    </span>
+                  </div>
+                  <div className="ml-6 mr-3 md:mr-0">
                     <Basket />
-                  </span>
+                  </div>
                 </>
               )}
             </>

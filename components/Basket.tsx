@@ -53,8 +53,9 @@ export default function Basket() {
 
   return (
     <Sheet>
-      <SheetTrigger className="relative">
+      <SheetTrigger className="relative flex flex-col items-center">
         <PiShoppingCartSimple />
+        <span className="text-xs opacity-80">Košík</span>
         <div className="absolute top-0 left-5 flex justify-center items-center w-6 h-6 bg-destructive text-destructive-foreground text-sm rounded-full">
           2
         </div>
