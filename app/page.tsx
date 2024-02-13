@@ -25,6 +25,7 @@ export default function Home() {
             alt="Farma Loužná - eshop"
             fill={true}
             style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <h2 className="absolute bottom-2 right-4 z-10 text-primary-foreground text-xl lg:text-2xl">
             pro partnery
@@ -39,6 +40,7 @@ export default function Home() {
             alt="Farma Loužná - naše kuřata"
             fill={true}
             style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <h2 className="absolute bottom-2 right-4 z-10 text-primary-foreground text-xl lg:text-2xl">
             naše kuřata
@@ -53,6 +55,7 @@ export default function Home() {
             alt="Farma Loužná - eshop"
             fill={true}
             style={{ objectFit: "cover" }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <h2 className="absolute bottom-2 right-4 z-10 text-primary-foreground text-xl lg:text-2xl">
             kontakty
