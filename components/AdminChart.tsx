@@ -41,6 +41,12 @@ export default function AdminChart() {
       objednávek: 0,
     },
   ]
+  const error = console.error
+  console.error = (...args: any) => {
+    if (/defaultProps/.test(args[0])) return
+    error(...args)
+  }
+
   return (
     <ResponsiveContainer
       width="100%"

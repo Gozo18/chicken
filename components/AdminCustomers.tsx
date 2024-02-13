@@ -251,7 +251,7 @@ export default function AdminCustomers() {
                     colSpan={columns.length}
                     className="h-24 text-center"
                   >
-                    No results.
+                    Žádné záznamy.
                   </TableCell>
                 </TableRow>
               )}
