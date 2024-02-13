@@ -14,6 +14,7 @@ export default function Ourchickens() {
               alt="Farma Loužná - volný chov"
               width={62}
               height={53}
+              style={{ width: "auto" }}
             />
           </div>
           <h2 className="mb-2 lg:mb-4 text-center font-semibold">VOLNÝ CHOV</h2>
@@ -29,6 +30,7 @@ export default function Ourchickens() {
               alt="Farma Loužná - volný chov"
               width={62}
               height={53}
+              style={{ width: "auto" }}
             />
           </div>
           <h2 className="mb-2 lg:mb-4 text-center font-semibold">
@@ -46,6 +48,7 @@ export default function Ourchickens() {
               alt="Farma Loužná - volný chov"
               width={62}
               height={53}
+              style={{ width: "auto" }}
             />
           </div>
           <h2 className="mb-2 lg:mb-4 text-center font-semibold">
@@ -63,6 +66,7 @@ export default function Ourchickens() {
               alt="Farma Loužná - volný chov"
               width={62}
               height={53}
+              style={{ width: "auto" }}
             />
           </div>
           <h2 className="mb-2 lg:mb-4 text-center font-semibold">
@@ -81,6 +85,7 @@ export default function Ourchickens() {
               alt="Farma Loužná - volný chov"
               width={62}
               height={53}
+              style={{ width: "auto" }}
             />
           </div>
           <h2 className="mb-2 lg:mb-4 text-center font-semibold">
@@ -98,6 +103,7 @@ export default function Ourchickens() {
               alt="Farma Loužná - volný chov"
               width={62}
               height={53}
+              style={{ width: "auto" }}
             />
           </div>
           <h2 className="mb-2 lg:mb-4 text-center font-semibold">
@@ -115,6 +121,7 @@ export default function Ourchickens() {
               alt="Farma Loužná - volný chov"
               width={62}
               height={53}
+              style={{ width: "auto" }}
             />
           </div>
           <h2 className="mb-2 lg:mb-4 text-center font-semibold">
