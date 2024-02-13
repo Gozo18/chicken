@@ -10,7 +10,7 @@ export default function Home() {
       <h1 className="mb-2 lg:mb-4 text-center font-semibold text-xl">
         Farma Loužná
       </h1>
-      <p className="mb-2 lg:mb-4 p-2 lg:p-4 text-center text-sm lg:text-base opacity-80 border">
+      <p className="mb-2 lg:mb-4 p-2 lg:p-4 text-center text-sm lg:text-base opacity-80 border rounded-md">
         Jsme malou rodinnou farmou, která je díky způsobu chovu na českém trhu
         ojedinělá. Zabýváme se chovem kuřat a následným zpracováním kvalitního
         kuřecího masa, které neobsahuje žádná antibiotika.
@@ -27,7 +27,7 @@ export default function Home() {
             style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          <h2 className="absolute bottom-2 right-4 z-10 text-primary-foreground text-xl lg:text-2xl">
+          <h2 className="absolute bottom-2 right-4 z-10 text-primary-foreground text-xl lg:text-2xl drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)]">
             pro partnery
           </h2>
         </Link>
@@ -42,7 +42,7 @@ export default function Home() {
             style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          <h2 className="absolute bottom-2 right-4 z-10 text-primary-foreground text-xl lg:text-2xl">
+          <h2 className="absolute bottom-2 right-4 z-10 text-primary-foreground text-xl lg:text-2xl drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)]">
             naše kuřata
           </h2>
         </Link>
@@ -57,7 +57,7 @@ export default function Home() {
             style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          <h2 className="absolute bottom-2 right-4 z-10 text-primary-foreground text-xl lg:text-2xl">
+          <h2 className="absolute bottom-2 right-4 z-10 text-primary-foreground text-xl lg:text-2xl drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)]">
             kontakty
           </h2>
         </Link>
