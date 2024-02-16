@@ -10,6 +10,7 @@ import { useAuthState } from "react-firebase-hooks/auth"
 import { auth } from "../config/firebase"
 import { useToast } from "@/components/ui/use-toast"
 import Login from "./Login"
+import { PiHouseLine } from "react-icons/pi"
 
 export default function Nav() {
   const { toast } = useToast()
@@ -64,7 +65,10 @@ export default function Nav() {
             </>
           </div>
         ) : (
-          <div className="flex items-center">administrace</div>
+          <Link href="/" className="flex flex-col items-center text-4xl">
+            <PiHouseLine />
+            <span className="text-center text-xs opacity-80">Domů</span>
+          </Link>
         )}
       </nav>
     </header>
