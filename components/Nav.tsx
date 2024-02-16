@@ -1,13 +1,34 @@
 "use client"
 
+import { useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import Basket from "./Basket"
 import User from "./User"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
+import { useAuthState } from "react-firebase-hooks/auth"
+import { auth } from "../config/firebase"
+import { useToast } from "@/components/ui/use-toast"
+import Login from "./Login"
 
 export default function Nav() {
+  const { toast } = useToast()
   const path = usePathname()
+  const [user, loading] = useAuthState(auth)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (path === "/eshop" || path === "/admin") {
+      if (!user) {
+        toast({
+          variant: "destructive",
+          title: "Prosím, přihlašte se!",
+          description: "Pro vstup do této sekce je potřeba se přihlásit.",
+        })
+        router.push("/")
+      }
+    }
+  }, [path])
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-background z-10">
@@ -25,11 +46,8 @@ export default function Nav() {
         {path != "/admin" ? (
           <div className="flex text-4xl items-center">
             <>
-              {path != "/eshop" ? (
-                <div className="flex flex-col items-center ml-2 lg:ml-6 mr-3 md:mr-0">
-                  <User />
-                  <span className="text-xs opacity-80">From czech s.r.o.</span>
-                </div>
+              {!user ? (
+                <Login />
               ) : (
                 <>
                   <div className="flex flex-col items-center ml-2 lg:ml-6 md:mr-0">

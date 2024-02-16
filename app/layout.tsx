@@ -4,6 +4,7 @@ import "../styles/globals.css"
 import { cn } from "../lib/utils"
 import Nav from "@/components/Nav"
 import Footer from "@/components/Footer"
+import { Toaster } from "@/components/ui/toaster"
 
 const fontSans = FontSans({
   weight: ["300", "400", "500", "700"],
@@ -33,6 +34,7 @@ export default function RootLayout({
         <Nav />
         {children}
         <Footer />
+        <Toaster />
       </body>
     </html>
   )

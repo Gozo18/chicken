@@ -7,7 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 export default function Home() {
   return (
     <main className="mt-20 lg:mt-32 px-2 sm:px-4 md:px-8 xl:px-24">
-      <h1 className="mb-2 lg:mb-4 text-center font-semibold text-xl">
+      <h1 className="mb-2 lg:mb-4 text-center font-semibold text-xl lg:text-2xl">
         Farma Loužná
       </h1>
       <p className="mb-2 lg:mb-4 p-2 lg:p-4 text-center text-sm lg:text-base opacity-80 border rounded-md">
@@ -63,11 +63,12 @@ export default function Home() {
         </Link>
       </div>
       <Alert className="mt-2 lg:mt-4">
-        <Info className="h-4 w-4" />
-        <AlertTitle>Kde nakoupit?</AlertTitle>
-        <AlertDescription>
+        <Info className="h-4 w-4 lg:h-6 lg:w-6" />
+        <AlertTitle className="lg:text-xl lg:ml-2">Kde nakoupit?</AlertTitle>
+        <AlertDescription className="lg:ml-2">
           Rádi vás obsloužíme u nás na farmě ve všední dny od 8:00 do 16:00. Pro
-          větší objednávky pište na náš e-mail:{" "}
+          větší objednávky a pro registraci obchodních partnerů pište na náš
+          e-mail:{" "}
           <a href="mailto:info@farmalouzna.cz" className="underline">
             info@farmalouzna.cz
           </a>
