@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 
-export default function UserInfo() {
+export default function UserInfo({ data }: any) {
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1">
@@ -145,11 +145,11 @@ export default function UserInfo() {
           Údaje o uživateli
         </AccordionTrigger>
         <AccordionContent>
-          <div>Budějovická 12</div>
-          <div>České Budějovice</div>
-          <div className="my-2">Kontaktní osoba: Aleš Zeman</div>
-          <div>Telefon: +420 756 789 789</div>
-          <div>E-mail: ales@fromczech.cz</div>
+          <div>Ulice: {data.ulice}</div>
+          <div>Město: {data.mesto}</div>
+          <div className="my-2">Kontaktní osoba: {data.jmeno}</div>
+          <div>Telefon: {data.telefon}</div>
+          <div>E-mail: {data.email}</div>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3" className="text-left">

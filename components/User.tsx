@@ -13,7 +13,19 @@ import UserInfo from "./UserInfo"
 import { auth } from "../config/firebase"
 import { Button } from "./ui/button"
 
-export default function User() {
+type UserData = {
+  dic?: string
+  email?: string
+  ico?: string
+  mesto?: string
+  name?: string
+  psc?: string
+  telefon?: string
+  ulice?: string
+  jmeno?: string
+}
+
+export default function User({ data }: { data: UserData }) {
   const router = useRouter()
   const { toast } = useToast()
 
@@ -29,8 +41,11 @@ export default function User() {
 
   return (
     <Sheet>
-      <SheetTrigger>
-        <PiUser />
+      <SheetTrigger asChild>
+        <div className="flex flex-col items-center ml-2 lg:ml-6 md:mr-0 cursor-pointer">
+          <PiUser />
+          <span className="text-center text-xs opacity-80">{data.name}</span>
+        </div>
       </SheetTrigger>
       <SheetContent side="top">
         <SheetHeader>
@@ -39,12 +54,12 @@ export default function User() {
               <div className="mr-2 text-3xl">
                 <PiUserCircleThin />
               </div>
-              From Czech s.r.o.
+              {data.name}
             </div>
           </SheetTitle>
           <SheetDescription asChild>
             <div>
-              <UserInfo />
+              <UserInfo data={data} />
               <Button className="mt-12 float-right" onClick={logout}>
                 Odhlásit se
               </Button>
