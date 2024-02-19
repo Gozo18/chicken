@@ -13,6 +13,7 @@ import Login from "./Login"
 import { PiHouseLine } from "react-icons/pi"
 import { getUsersDocument } from "@/lib/getUsersDocument"
 import { UserData } from "@/lib/types"
+import { useAppContext } from "@/context/context"
 
 export default function Nav() {
   const { toast } = useToast()
@@ -20,6 +21,8 @@ export default function Nav() {
   const [user, loading] = useAuthState(auth)
   const router = useRouter()
   const [data, setData] = useState<UserData>()
+
+  const { setUserEmail } = useAppContext()
 
   useEffect(() => {
     if (path === "/eshop" || path === "/admin") {
@@ -39,7 +42,7 @@ export default function Nav() {
       const userData = async () => {
         try {
           if (user != null && user.email != null) {
-            const getData: UserData = await getUsersDocument(user.email)
+            const getData = await getUsersDocument(user.email)
             setData(getData)
           }
         } catch (err) {
@@ -48,6 +51,7 @@ export default function Nav() {
       }
 
       userData()
+      setUserEmail(user.email)
     }
   }, [user])
 
