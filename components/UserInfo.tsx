@@ -4,8 +4,29 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { UserData, StoreData } from "@/lib/types"
+import { getStoresCollection } from "@/lib/getStoresCollection"
+import { useState, useEffect } from "react"
 
-export default function UserInfo({ data }: any) {
+export default function UserInfo({ data }: { data: UserData }) {
+  const [stores, setStores] = useState<StoreData>()
+
+  useEffect(() => {
+    const storesCollection = async () => {
+      try {
+        if (data.email) {
+          const email: string = data.email
+          const storesData: StoreData = await getStoresCollection(email)
+          setStores(storesData)
+        }
+      } catch (err) {
+        console.log("Něco se nepovedlo!")
+      }
+    }
+
+    storesCollection()
+  }, [data.email])
+
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1">
@@ -145,24 +166,49 @@ export default function UserInfo({ data }: any) {
           Údaje o uživateli
         </AccordionTrigger>
         <AccordionContent>
+          <div className="mb-2">Kontaktní osoba: {data.jmeno}</div>
+          <div className="my-2">
+            Telefon:{" "}
+            <a href={"tel:" + data.telefon} className="underline">
+              {data.telefon}
+            </a>
+          </div>
+          <div className="my-2">
+            E-mail:{" "}
+            <a href={"mailto:" + data.email} className="underline">
+              {data.email}
+            </a>
+          </div>
           <div>Ulice: {data.ulice}</div>
           <div>Město: {data.mesto}</div>
-          <div className="my-2">Kontaktní osoba: {data.jmeno}</div>
-          <div>Telefon: {data.telefon}</div>
-          <div>E-mail: {data.email}</div>
+          <div>PSČ: {data.psc}</div>
+          <div className="mt-2">IČO: {data.ico}</div>
+          <div>DIČ: {data.dic}</div>
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="item-3" className="text-left">
-        <AccordionTrigger className="font-bold">Prodejny (2)</AccordionTrigger>
-        <AccordionContent>
-          <div className="font-semibold">Prodejna Budějovice</div>
-          <div>Budějovická 12</div>
-          <div>České Budějovice</div>
-          <div className="mt-2 font-semibold">Prodejna Sušice</div>
-          <div>Sušice 12</div>
-          <div>Sušice</div>
-        </AccordionContent>
-      </AccordionItem>
+      {stores && (
+        <AccordionItem value="item-3" className="text-left">
+          <AccordionTrigger className="font-bold">
+            Prodejny ({stores.length})
+          </AccordionTrigger>
+          <AccordionContent>
+            {stores.map((store: any, i: number) => (
+              <div key={i} className="mb-2">
+                <div className="font-semibold">Název: {store.jmeno}</div>
+                <div>Ulice: {store.ulice}</div>
+                <div>Město: {store.mesto}</div>
+                <div>PSČ: {store.psc}</div>
+                <div className="mt-2">
+                  Telefon:{" "}
+                  <a href={"tel:" + data.telefon} className="underline">
+                    {store.telefon}
+                  </a>
+                </div>
+              </div>
+            ))}
+          </AccordionContent>
+        </AccordionItem>
+      )}
     </Accordion>
   )
 }

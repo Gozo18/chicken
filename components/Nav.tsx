@@ -11,19 +11,8 @@ import { auth } from "../config/firebase"
 import { useToast } from "@/components/ui/use-toast"
 import Login from "./Login"
 import { PiHouseLine } from "react-icons/pi"
-import { getDocument } from "@/lib/getDocument"
-
-type UserData = {
-  dic?: string
-  email?: string
-  ico?: string
-  mesto?: string
-  name?: string
-  psc?: string
-  telefon?: string
-  ulice?: string
-  jmeno?: string
-}
+import { getUsersDocument } from "@/lib/getUsersDocument"
+import { UserData } from "@/lib/types"
 
 export default function Nav() {
   const { toast } = useToast()
@@ -50,7 +39,7 @@ export default function Nav() {
       const userData = async () => {
         try {
           if (user != null && user.email != null) {
-            const getData: UserData = await getDocument(user.email)
+            const getData: UserData = await getUsersDocument(user.email)
             setData(getData)
           }
         } catch (err) {

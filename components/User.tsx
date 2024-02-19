@@ -12,18 +12,7 @@ import { PiUser, PiUserCircleThin } from "react-icons/pi"
 import UserInfo from "./UserInfo"
 import { auth } from "../config/firebase"
 import { Button } from "./ui/button"
-
-type UserData = {
-  dic?: string
-  email?: string
-  ico?: string
-  mesto?: string
-  name?: string
-  psc?: string
-  telefon?: string
-  ulice?: string
-  jmeno?: string
-}
+import { UserData } from "@/lib/types"
 
 export default function User({ data }: { data: UserData }) {
   const router = useRouter()
