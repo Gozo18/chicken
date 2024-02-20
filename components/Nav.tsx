@@ -1,29 +1,27 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import Basket from "./Basket"
-import User from "./User"
+import { useEffect } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { auth } from "../config/firebase"
 import { useToast } from "@/components/ui/use-toast"
-import Login from "./Login"
 import { PiHouseLine } from "react-icons/pi"
-import { getUsersDocument } from "@/lib/getUsersDocument"
-import { UserData } from "@/lib/types"
 import { useAppContext } from "@/context/context"
+import Link from "next/link"
+import Image from "next/image"
+import Basket from "./Basket"
+import User from "./User"
+import Login from "./Login"
 
 export default function Nav() {
   const { toast } = useToast()
   const path = usePathname()
   const [user, loading] = useAuthState(auth)
   const router = useRouter()
-  const [data, setData] = useState<UserData>()
 
   const { setUserEmail } = useAppContext()
 
+  /* Protected paths */
   useEffect(() => {
     if (path === "/eshop" || path === "/admin") {
       if (!user) {
@@ -37,25 +35,14 @@ export default function Nav() {
     }
   }, [path])
 
+  /* Set user e-mail */
   useEffect(() => {
     if (user) {
-      const userData = async () => {
-        try {
-          if (user != null && user.email != null) {
-            const getData = await getUsersDocument(user.email)
-            setData(getData)
-          }
-        } catch (err) {
-          console.log("Něco se nepovedlo!")
-        }
-      }
-
-      userData()
       setUserEmail(user.email)
     }
   }, [user])
 
-  if (!user || data === undefined) {
+  if (!user) {
     return (
       <header className="fixed top-0 left-0 right-0 bg-background z-10">
         <nav className="flex justify-between py-2 lg:pt-10 lg:pb-4 px-2 sm:px-4 md:px-8 xl:px-24">
@@ -75,9 +62,7 @@ export default function Nav() {
         </nav>
       </header>
     )
-  }
-
-  if (data) {
+  } else {
     return (
       <header className="fixed top-0 left-0 right-0 bg-background z-10">
         <nav className="flex justify-between py-2 lg:pt-10 lg:pb-4 px-2 sm:px-4 md:px-8 xl:px-24">
@@ -94,7 +79,7 @@ export default function Nav() {
           {path != "/admin" ? (
             <div className="flex text-4xl items-center">
               <div className="flex flex-col items-center ml-2 lg:ml-6 md:mr-0">
-                <User data={data} />
+                <User />
               </div>
               <div className=" ml-2 lg:ml-6 mr-3 md:mr-0">
                 <Basket />
