@@ -8,6 +8,8 @@ export type UserData = {
   telefon?: string
   ulice?: string
   jmeno?: string
+  blok?: boolean
+  faktura?: boolean
 }
 
 export type StoreData = [
@@ -17,5 +19,22 @@ export type StoreData = [
     telefon?: string
     ulice?: string
     jmeno?: string
+  }
+]
+
+export type ProductsData = [
+  {
+    DPH?: number
+    akce?: boolean
+    akceCena?: number
+    bezDPH?: number
+    dostupnost?: string
+    hmotnost?: string
+    kod?: string
+    nazev?: string
+    obal?: string
+    obraz?: string
+    stav?: string
+    zobrazit?: boolean
   }
 ]

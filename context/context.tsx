@@ -9,11 +9,11 @@ import { useToast } from "@/components/ui/use-toast"
 
 type Context = {
   user: UserData | undefined
-  setUser: any
-  userEmail: string | undefined
-  setUserEmail: any
+  setUser: (value: undefined | UserData) => void
+  userEmail: string | null | undefined
+  setUserEmail: (value: null | string | undefined) => void
   stores: StoreData | undefined
-  setStores: any
+  setStores: (value: undefined | StoreData) => void
 }
 
 const contextDefaultValues: Context = {
@@ -30,7 +30,7 @@ const AppContext = createContext<Context>(contextDefaultValues)
 export function AppWrapper({ children }: { children: React.ReactNode }) {
   const { toast } = useToast()
 
-  const [userEmail, setUserEmail] = useState()
+  const [userEmail, setUserEmail] = useState<string | null | undefined>()
   let [user, setUser] = useState<UserData | undefined>()
   let [stores, setStores] = useState<StoreData | undefined>()
 
@@ -57,6 +57,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         try {
           const getStoresData = await getStoresCollection(userEmail)
           setStores(getStoresData)
+          console.log(stores)
         } catch (err) {
           toast({
             variant: "secondary",

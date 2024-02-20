@@ -11,5 +11,7 @@ export async function getStoresCollection(email: string) {
     stores.push(doc.data())
   })
 
+  stores.shift()
+
   return stores
 }
