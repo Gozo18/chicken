@@ -23,7 +23,7 @@ export default function Nav() {
 
   /* Protected paths */
   useEffect(() => {
-    if (path === "/eshop" || path === "/admin") {
+    if (path === "/admin") {
       if (!user) {
         toast({
           variant: "destructive",

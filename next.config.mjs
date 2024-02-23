@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "chicken-3455e.appspot.com/",
+        hostname: "**",
         port: "",
-        pathname: "/products/**",
+        pathname: "**",
       },
     ],
   },

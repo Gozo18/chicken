@@ -17,10 +17,13 @@ import UserInfo from "./UserInfo"
 export default function User() {
   const router = useRouter()
   const { toast } = useToast()
-  const { user } = useAppContext()
+  const { user, setUserEmail, setUser, setStores } = useAppContext()
 
   /* User logout */
   const logout = () => {
+    setUser(undefined)
+    setUserEmail(undefined)
+    setStores(undefined)
     router.push("/")
     auth.signOut()
     toast({

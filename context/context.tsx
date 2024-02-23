@@ -57,7 +57,6 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         try {
           const getStoresData = await getStoresCollection(userEmail)
           setStores(getStoresData)
-          console.log(stores)
         } catch (err) {
           toast({
             variant: "secondary",
