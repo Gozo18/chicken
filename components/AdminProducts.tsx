@@ -35,77 +35,37 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { useAppContext } from "@/context/context"
+import { ProductData } from "@/lib/types"
 
-const data: Payment[] = [
+export const columns: ColumnDef<ProductData>[] = [
   {
-    id: "m5gr84i9",
-    Cena: 140,
-    Popis: "chlazené",
-    Produkt: "Kuře celé",
-  },
-  {
-    id: "3u1reuv4",
-    Cena: 150,
-    Popis: "mražené",
-    Produkt: "Kuře celé",
-  },
-  {
-    id: "derv1ws0",
-    Cena: 130,
-    Popis: "chlazené",
-    Produkt: "Kuřecí prsní řízky SUPREME po 2",
-  },
-  {
-    id: "5kma53ae",
-    Cena: 115,
-    Popis: "mražené",
-    Produkt: "Kuřecí prsní řízky SUPREME po 2",
-  },
-  {
-    id: "bhqecj4p",
-    Cena: 120,
-    Popis: "chlazená",
-    Produkt: "Kuřecí stehna",
-  },
-]
-
-export type Payment = {
-  id: string
-  Cena: number
-  Popis: string
-  Produkt: string
-}
-
-export const columns: ColumnDef<Payment>[] = [
-  {
-    accessorKey: "Produkt",
+    accessorKey: "nazev",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Produkt
+          Název produktu
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
-    cell: ({ row }) => <div className="">{row.getValue("Produkt")}</div>,
+    cell: ({ row }) => <div className="">{row.getValue("nazev")}</div>,
   },
   {
-    accessorKey: "Popis",
+    accessorKey: "stav",
     header: "Popis",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("Popis")}</div>
-    ),
+    cell: ({ row }) => <div className="capitalize">{row.getValue("stav")}</div>,
   },
   {
-    accessorKey: "Cena",
-    header: () => <div className="text-right">Cena</div>,
+    accessorKey: "bezDPH",
+    header: () => <div className="text-right">Cena bez DPH</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("Cena"))
+      const amount = parseFloat(row.getValue("bezDPH"))
 
-      // Format the amount as a dollar amount
+      // Format the amount as a czk amount
       const formatted = new Intl.NumberFormat("cs-CS", {
         style: "currency",
         currency: "CZK",
@@ -118,7 +78,7 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original
+      const product = row.original
 
       return (
         <DropdownMenu>
@@ -131,7 +91,10 @@ export const columns: ColumnDef<Payment>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Možnosti</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => {
+                navigator.clipboard.writeText(product.kod)
+                console.log(product.kod)
+              }}
             >
               Úprava produktu
             </DropdownMenuItem>
@@ -145,6 +108,8 @@ export const columns: ColumnDef<Payment>[] = [
 ]
 
 export default function AdminProducts() {
+  const { products } = useAppContext()
+  const data: any = products
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -179,11 +144,9 @@ export default function AdminProducts() {
         <div className="flex items-center py-4">
           <Input
             placeholder="Filtrovat produkty..."
-            value={
-              (table.getColumn("Produkt")?.getFilterValue() as string) ?? ""
-            }
+            value={(table.getColumn("nazev")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
-              table.getColumn("Produkt")?.setFilterValue(event.target.value)
+              table.getColumn("nazev")?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
           />

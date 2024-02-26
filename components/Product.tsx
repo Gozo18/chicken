@@ -29,49 +29,51 @@ import {
 import Popup from "./Popup"
 import { useAppContext } from "@/context/context"
 import { getImage } from "@/lib/getImage"
+import { ProductType } from "@/lib/types"
 
-type ProductType = {
-  image: string
-  name: string
-  desc: string
-  pack: string
-  code: string
-  weight: string
-}
-
-export default function Product({
-  image,
-  name,
-  desc,
-  pack,
-  code,
-  weight,
-}: ProductType) {
+export default function Product(item: ProductType) {
   const { userEmail } = useAppContext()
+
+  const {
+    DPH,
+    akce,
+    akceCena,
+    bezDPH,
+    dostupnost,
+    hmotnost,
+    kod,
+    nazev,
+    obal,
+    obraz,
+    stav,
+    zobrazit,
+  } = item.item
 
   const [imageUrl, setImageUrl] = useState("")
   const [loadingImage, setLoadingImage] = useState(true)
 
   useEffect(() => {
     const getUrl = async () => {
-      const url = await getImage("products/chicken.jpg")
-      const urlString = String(url)
-      setImageUrl(urlString)
-      setLoadingImage(false)
+      if (obraz) {
+        const url = await getImage(obraz)
+        const urlString = String(url)
+        setImageUrl(urlString)
+        setLoadingImage(false)
+      }
     }
 
     getUrl()
-  }, [])
+  }, [obraz])
 
   return (
     <Card>
       <CardHeader>
         <CardDescription>
           <div className="relative w-full h-96 rounded-t-md overflow-hidden">
-            {!loadingImage ? (
+            {!loadingImage && nazev ? (
               <Image
                 src={imageUrl}
-                alt={name}
+                alt={nazev}
                 fill={true}
                 style={{ objectFit: "cover" }}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -94,27 +96,27 @@ export default function Product({
           </div>
         </CardDescription>
       </CardHeader>
-      <CardTitle>{name}</CardTitle>
+      <CardTitle>{nazev}</CardTitle>
       <CardContent>
         <div className="flex flex-col items-center my-2 xl:text-lg">
           <div className="flex my-1 lg:my-2">
             <span className="mr-2 text-sky-400 text-2xl">
-              {desc === "mražené" ? <PiSnowflakeThin /> : <PiThermometerThin />}
+              {stav === "mražené" ? <PiSnowflakeThin /> : <PiThermometerThin />}
             </span>
-            <span>{desc}</span>
+            <span>{stav}</span>
           </div>
           <div className="flex my-1 lg:my-2">
             <span className="mr-2 text-2xl">
               <PiPackageThin />
             </span>
-            <span>{pack}</span>
+            <span>{obal}</span>
           </div>
         </div>
       </CardContent>
       <CardFooter>
         <Drawer>
           <div className="flex w-full flex-col-reverse lg:flex-row lg:justify-between pb-6">
-            {userEmail ? <Popup name={name} desc={desc} /> : <div></div>}
+            {userEmail && nazev ? <Popup name={nazev} /> : <div></div>}
             <DrawerTrigger>
               <div className="w-full mb-2 lg:mb-0 px-4 py-2 border rounded-md">
                 Podrobnosti
@@ -123,35 +125,40 @@ export default function Product({
           </div>
           <DrawerContent>
             <DrawerHeader>
-              <DrawerTitle>
-                {name} - {desc}
-              </DrawerTitle>
+              <DrawerTitle>{nazev}</DrawerTitle>
               <DrawerDescription asChild>
                 <div className="flex justify-center w-full flex-col items-center">
-                  <Image src={image} alt={name} width={320} height={320} />
+                  {nazev && (
+                    <Image
+                      src={imageUrl}
+                      alt={nazev}
+                      width={320}
+                      height={320}
+                    />
+                  )}
                   <div className="mt-6 w-80">
                     <div className="flex justify-between xl:text-lg">
                       <div className="flex">
                         <span className="relative bottom-1 mr-2 text-sky-400 text-2xl">
-                          {desc === "mražené" ? (
+                          {stav === "mražené" ? (
                             <PiSnowflakeThin />
                           ) : (
                             <PiThermometerThin />
                           )}
                         </span>
-                        <span>{desc}</span>
+                        <span>{stav}</span>
                       </div>
                       <div className="flex">
                         <span className="relative bottom-1 mr-2 text-2xl">
                           <PiPackageThin />
                         </span>
-                        <span>{pack}</span>
+                        <span>{obal}</span>
                       </div>
                     </div>
                     <div className="my-4 w-full divide-y divide-solid">
                       <div className="flex justify-between w-full py-2">
                         <span>Objednací číslo:</span>
-                        <span>{code}</span>
+                        <span>{kod}</span>
                       </div>
                       <div className="flex justify-between w-full py-2">
                         <span>Dostupnost:</span>
@@ -159,7 +166,7 @@ export default function Product({
                       </div>
                       <div className="flex justify-between w-full py-2">
                         <span>Hmotnost od-do:</span>
-                        <span>{weight}</span>
+                        <span>{hmotnost}</span>
                       </div>
                     </div>
                   </div>

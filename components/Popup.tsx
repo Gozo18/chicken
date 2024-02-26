@@ -10,10 +10,9 @@ import { Input } from "@/components/ui/input"
 
 type PopupType = {
   name: string
-  desc: string
 }
 
-export default function Popup({ name, desc }: PopupType) {
+export default function Popup({ name }: PopupType) {
   return (
     <Dialog>
       <DialogTrigger>
@@ -25,11 +24,7 @@ export default function Popup({ name, desc }: PopupType) {
         <DialogHeader>
           <DialogTitle>
             <div className="mt-8">
-              Objednat{" "}
-              <span className="uppercase">
-                {name} - {desc}
-              </span>
-              ?
+              Objednat <span className="uppercase">{name}</span>?
             </div>
           </DialogTitle>
           <DialogDescription asChild>

@@ -28,7 +28,7 @@ export default function Home() {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <h2 className="absolute bottom-2 right-4 z-10 text-primary-foreground text-xl lg:text-2xl drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)]">
-            pro partnery
+            naše nabídka
           </h2>
         </Link>
         <Link
@@ -58,7 +58,7 @@ export default function Home() {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <h2 className="absolute bottom-2 right-4 z-10 text-primary-foreground text-xl lg:text-2xl drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)]">
-            kontakty
+            naše kontakty
           </h2>
         </Link>
       </div>

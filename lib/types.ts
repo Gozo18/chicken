@@ -22,8 +22,25 @@ export type StoreData = [
   }
 ]
 
-export type ProductsData = [
-  {
+export type ProductsData = [ProductData]
+
+export type ProductData = {
+  DPH: number
+  akce: boolean
+  akceCena: number
+  bezDPH: number
+  dostupnost: string
+  hmotnost: string
+  kod: string
+  nazev: string
+  obal: string
+  obraz: string
+  stav: string
+  zobrazit: boolean
+}
+
+export type ProductType = {
+  item: {
     DPH?: number
     akce?: boolean
     akceCena?: number
@@ -37,4 +54,4 @@ export type ProductsData = [
     stav?: string
     zobrazit?: boolean
   }
-]
+}
