@@ -26,7 +26,7 @@ const contextDefaultValues: Context = {
   setUserEmail: () => {},
   stores: [{}],
   setStores: () => {},
-  products: [{}],
+  products: undefined,
   setProducts: () => {},
 }
 

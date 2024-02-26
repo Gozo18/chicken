@@ -5,13 +5,13 @@ import { ProductsData } from "@/lib/types"
 export async function getProducts() {
   const querySnapshot = await getDocs(collection(db, "products"))
 
-  const products: ProductsData = [{}]
+  let products: any = []
 
   querySnapshot.forEach((doc) => {
     products.push(doc.data())
   })
 
-  products.shift()
+  /* products.shift() */
 
   return products
 }
