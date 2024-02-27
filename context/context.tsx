@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 import { createContext, useContext, useState } from "react"
-import { UserData, StoreData, ProductsData } from "@/lib/types"
+import { UserData, StoresData, ProductsData } from "@/lib/types"
 import { getUsersDocument } from "@/lib/getUsersDocument"
 import { getStoresCollection } from "@/lib/getStoresCollection"
 import { getProducts } from "@/lib/getProducts"
@@ -13,8 +13,8 @@ type Context = {
   setUser: (value: undefined | UserData) => void
   userEmail: string | null | undefined
   setUserEmail: (value: null | string | undefined) => void
-  stores: StoreData | undefined
-  setStores: (value: undefined | StoreData) => void
+  stores: StoresData | undefined
+  setStores: (value: undefined | StoresData) => void
   products: ProductsData | undefined
   setProducts: (value: undefined | ProductsData) => void
 }
@@ -37,7 +37,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
 
   const [userEmail, setUserEmail] = useState<string | null | undefined>()
   let [user, setUser] = useState<UserData | undefined>()
-  let [stores, setStores] = useState<StoreData | undefined>()
+  let [stores, setStores] = useState<StoresData | undefined>()
   let [products, setProducts] = useState<ProductsData | undefined>()
 
   useEffect(() => {

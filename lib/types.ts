@@ -12,15 +12,16 @@ export type UserData = {
   faktura?: boolean
 }
 
-export type StoreData = [
-  {
-    mesto?: string
-    psc?: string
-    telefon?: string
-    ulice?: string
-    jmeno?: string
-  }
-]
+export type StoreData = {
+  mesto?: string
+  psc?: string
+  telefon?: string
+  ulice?: string
+  jmeno?: string
+  denZavozu?: string
+}
+
+export type StoresData = [StoreData]
 
 export type ProductsData = [ProductData]
 

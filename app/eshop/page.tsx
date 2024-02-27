@@ -3,9 +3,20 @@
 import Product from "@/components/Product"
 import AlertBox from "@/components/AlertBox"
 import { useAppContext } from "@/context/context"
+import { ProductData, ProductsData } from "@/lib/types"
 
 export default function Eshop() {
   const { products } = useAppContext()
+
+  let result
+  if (products) {
+    result = products.filter(checkVisibility)
+  }
+
+  function checkVisibility(product: ProductData) {
+    return product.zobrazit === true
+  }
+
   return (
     <main className="mt-20 lg:mt-32 px-2 sm:px-4 md:px-8 xl:px-24">
       <h1 className="text-center font-semibold text-xl">
@@ -19,9 +30,13 @@ export default function Eshop() {
       </h2>
       {products ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-2">
-          {products.map((product) => (
-            <Product item={product} key={product.kod} />
-          ))}
+          {result != undefined && (
+            <>
+              {result.map((product) => (
+                <Product item={product} key={product.kod} />
+              ))}
+            </>
+          )}
         </div>
       ) : (
         <div className="flex justify-center items-center w-full h-80">

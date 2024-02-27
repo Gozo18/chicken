@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/table"
 import { useAppContext } from "@/context/context"
 import { ProductData } from "@/lib/types"
+import AdminViewProduct from "./AdminViewProduct"
 
 export const columns: ColumnDef<ProductData>[] = [
   {
@@ -80,29 +81,7 @@ export const columns: ColumnDef<ProductData>[] = [
     cell: ({ row }) => {
       const product = row.original
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Otevřít menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Možnosti</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => {
-                navigator.clipboard.writeText(product.kod)
-                console.log(product.kod)
-              }}
-            >
-              Úprava produktu
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Detail produktu</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
+      return <AdminViewProduct item={product} />
     },
   },
 ]

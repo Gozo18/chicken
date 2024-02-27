@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { useAppContext } from "@/context/context"
+import { StoreData } from "@/lib/types"
 
 export default function UserInfo() {
   const { user, stores } = useAppContext()
@@ -175,12 +176,13 @@ export default function UserInfo() {
               Prodejny ({stores.length})
             </AccordionTrigger>
             <AccordionContent>
-              {stores.map((store: any, i: number) => (
+              {stores.map((store: StoreData, i: number) => (
                 <div key={i} className="mb-2">
                   <div className="font-semibold">Název: {store.jmeno}</div>
                   <div>Ulice: {store.ulice}</div>
                   <div>Město: {store.mesto}</div>
                   <div>PSČ: {store.psc}</div>
+                  <div className="mt-2">Den závozu: {store.denZavozu}</div>
                   <div className="mt-2">
                     Telefon:{" "}
                     <a href={"tel:" + store.telefon} className="underline">
