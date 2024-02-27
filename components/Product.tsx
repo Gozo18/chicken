@@ -65,6 +65,14 @@ export default function Product(item: ProductType) {
     getUrl()
   }, [obraz])
 
+  const amount: any = bezDPH
+
+  // Format the amount as a czk amount
+  const formatted = new Intl.NumberFormat("cs-CS", {
+    style: "currency",
+    currency: "CZK",
+  }).format(amount)
+
   return (
     <Card>
       <CardHeader>
@@ -100,7 +108,7 @@ export default function Product(item: ProductType) {
       <CardContent>
         <div className="flex flex-col items-center my-2 xl:text-lg">
           <div className="flex my-1 lg:my-2">
-            <span className="mr-2 text-sky-400 text-2xl">
+            <span className="mr-2 text-sky-700 text-2xl">
               {stav === "mražené" ? <PiSnowflakeThin /> : <PiThermometerThin />}
             </span>
             <span>{stav}</span>
@@ -111,6 +119,12 @@ export default function Product(item: ProductType) {
             </span>
             <span>{obal}</span>
           </div>
+          {userEmail && (
+            <div className="mb-2 text-xl text-sky-700 font-semibold">
+              {formatted}{" "}
+              <span className="text-xs text-primary font-normal">bez DPH</span>
+            </div>
+          )}
         </div>
       </CardContent>
       <CardFooter>
@@ -139,7 +153,7 @@ export default function Product(item: ProductType) {
                   <div className="mt-6 w-80">
                     <div className="flex justify-between xl:text-lg">
                       <div className="flex">
-                        <span className="relative bottom-1 mr-2 text-sky-400 text-2xl">
+                        <span className="relative bottom-1 mr-2 text-sky-700 text-2xl">
                           {stav === "mražené" ? (
                             <PiSnowflakeThin />
                           ) : (
@@ -155,6 +169,12 @@ export default function Product(item: ProductType) {
                         <span>{obal}</span>
                       </div>
                     </div>
+                    <div className="mt-4 w-full text-lg text-center text-sky-700 font-semibold">
+                      {formatted}{" "}
+                      <span className="text-xs text-primary font-normal">
+                        bez DPH
+                      </span>
+                    </div>
                     <div className="my-4 w-full divide-y divide-solid">
                       <div className="flex justify-between w-full py-2">
                         <span>Objednací číslo:</span>
@@ -162,7 +182,7 @@ export default function Product(item: ProductType) {
                       </div>
                       <div className="flex justify-between w-full py-2">
                         <span>Dostupnost:</span>
-                        <span>ihned k odběru</span>
+                        <span>{dostupnost}</span>
                       </div>
                       <div className="flex justify-between w-full py-2">
                         <span>Hmotnost od-do:</span>
