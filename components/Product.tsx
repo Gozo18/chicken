@@ -65,13 +65,15 @@ export default function Product(item: ProductType) {
     getUrl()
   }, [obraz])
 
-  const amount: any = bezDPH
-
   // Format the amount as a czk amount
-  const formatted = new Intl.NumberFormat("cs-CS", {
-    style: "currency",
-    currency: "CZK",
-  }).format(amount)
+  let formatted
+  if (bezDPH != undefined) {
+    const amount: number = bezDPH
+    formatted = new Intl.NumberFormat("cs-CS", {
+      style: "currency",
+      currency: "CZK",
+    }).format(amount)
+  }
 
   return (
     <Card>
@@ -120,7 +122,7 @@ export default function Product(item: ProductType) {
             <span>{obal}</span>
           </div>
           {userEmail && (
-            <div className="mb-2 text-xl text-sky-700 font-semibold">
+            <div className="my-2 text-xl text-sky-700 font-semibold">
               {formatted}{" "}
               <span className="text-xs text-primary font-normal">bez DPH</span>
             </div>
@@ -169,13 +171,13 @@ export default function Product(item: ProductType) {
                         <span>{obal}</span>
                       </div>
                     </div>
-                    <div className="mt-4 w-full text-lg text-center text-sky-700 font-semibold">
+                    <div className="my-2 lg:my-4 w-full text-lg text-center text-sky-700 font-semibold">
                       {formatted}{" "}
                       <span className="text-xs text-primary font-normal">
                         bez DPH
                       </span>
                     </div>
-                    <div className="my-4 w-full divide-y divide-solid">
+                    <div className="my-2 lg:my-4 w-full divide-y divide-solid">
                       <div className="flex justify-between w-full py-2">
                         <span>Objednací číslo:</span>
                         <span>{kod}</span>
