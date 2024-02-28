@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { ProductType } from "@/lib/types"
 import {
   Dialog,
@@ -13,7 +12,6 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -29,12 +27,12 @@ import {
 import { Input } from "@/components/ui/input"
 import { Switch } from "@/components/ui/switch"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import Image from "next/image"
-import { getImage } from "@/lib/getImage"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { PiPencilSimpleThin } from "react-icons/pi"
+import AdminProducImageEdit from "./AdminProducImageEdit"
 
 const formSchema = z.object({
   nazev: z.string().min(2).max(40),
@@ -67,21 +65,10 @@ export default function AdminEditProduct(item: ProductType) {
     zobrazit,
   } = item.item
 
-  const [imageUrl, setImageUrl] = useState("")
-  const [loadingImage, setLoadingImage] = useState(true)
-
-  useEffect(() => {
-    const getUrl = async () => {
-      if (obraz) {
-        const url = await getImage(obraz)
-        const urlString = String(url)
-        setImageUrl(urlString)
-        setLoadingImage(false)
-      }
-    }
-
-    getUrl()
-  }, [obraz])
+  let pic: string
+  if (obraz != undefined) {
+    pic = obraz
+  }
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -102,7 +89,7 @@ export default function AdminEditProduct(item: ProductType) {
     },
   })
 
-  console.log(form)
+  /* console.log(form) */
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -187,7 +174,7 @@ export default function AdminEditProduct(item: ProductType) {
                 name="akce"
                 render={({ field }) => (
                   <FormItem className="flex items-center my-2">
-                    <FormLabel className="mt-2 mr-2 w-32">Akce</FormLabel>
+                    <FormLabel className="mt-2 w-24">Akce</FormLabel>
                     <FormControl>
                       <Switch
                         checked={field.value}
@@ -272,14 +259,20 @@ export default function AdminEditProduct(item: ProductType) {
                 render={({ field }) => (
                   <FormItem className="flex items-center my-2">
                     <FormLabel className="mt-2 mr-2 w-32">Stav</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Stav"
-                        {...field}
-                        tabIndex={-1}
-                        className="mr-1"
-                      />
-                    </FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger tabIndex={-1} className="mr-1">
+                          <SelectValue placeholder="Vyberte z možností" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="mrazené">mrazené</SelectItem>
+                        <SelectItem value="chlazené">chlazené</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -325,14 +318,15 @@ export default function AdminEditProduct(item: ProductType) {
                 name="obraz"
                 render={({ field }) => (
                   <FormItem className="flex items-center my-2">
-                    <FormLabel className="mt-2 mr-2 w-32">Obrázek</FormLabel>
+                    <FormLabel className="mt-2 w-28">Obrázek</FormLabel>
                     <FormControl>
-                      <Input
+                      {/* <Input
                         placeholder="Obrázek"
                         {...field}
                         tabIndex={-1}
                         className="mr-1"
-                      />
+                      /> */}
+                      <AdminProducImageEdit pic={pic} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -343,7 +337,7 @@ export default function AdminEditProduct(item: ProductType) {
                 name="zobrazit"
                 render={({ field }) => (
                   <FormItem className="flex items-center my-2">
-                    <FormLabel className="mt-2 mr-2 w-32">Zobrazit</FormLabel>
+                    <FormLabel className="mt-2 w-24">Zobrazit</FormLabel>
                     <FormControl>
                       <Switch
                         checked={field.value}
@@ -356,7 +350,9 @@ export default function AdminEditProduct(item: ProductType) {
                 )}
               />
             </ScrollArea>
-            <Button type="submit">Uložit změny</Button>
+            <Button type="submit" className="float-right">
+              Uložit změny
+            </Button>
           </form>
         </Form>
       </DialogContent>
