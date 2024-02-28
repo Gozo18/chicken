@@ -38,6 +38,7 @@ import {
 import { useAppContext } from "@/context/context"
 import { ProductData } from "@/lib/types"
 import AdminViewProduct from "./AdminViewProduct"
+import AdminEditProduct from "./AdminEditProduct"
 
 export const columns: ColumnDef<ProductData>[] = [
   {
@@ -81,7 +82,12 @@ export const columns: ColumnDef<ProductData>[] = [
     cell: ({ row }) => {
       const product = row.original
 
-      return <AdminViewProduct item={product} />
+      return (
+        <div className="flex justify-end">
+          <AdminViewProduct item={product} />
+          <AdminEditProduct item={product} />
+        </div>
+      )
     },
   },
 ]

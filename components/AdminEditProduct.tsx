@@ -2,14 +2,54 @@
 
 import { useState, useEffect } from "react"
 import { ProductType } from "@/lib/types"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Input } from "@/components/ui/input"
+import { Switch } from "@/components/ui/switch"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import Image from "next/image"
 import { getImage } from "@/lib/getImage"
-import {
-  PiPackageThin,
-  PiSnowflakeThin,
-  PiThermometerThin,
-} from "react-icons/pi"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { PiPencilSimpleThin } from "react-icons/pi"
+
+const formSchema = z.object({
+  nazev: z.string().min(2).max(40),
+  kod: z.string().min(2).max(3),
+  bezDPH: z.number().min(1).max(999),
+  akce: z.boolean(),
+  akceCena: z.number().min(1).max(999),
+  DPH: z.number().min(0).max(99),
+  dostupnost: z.string().min(2).max(40),
+  stav: z.string().min(2).max(40),
+  hmotnost: z.string().min(2).max(40),
+  obal: z.string().min(2).max(40),
+  obraz: z.string().min(2).max(40),
+  zobrazit: z.boolean(),
+})
 
 export default function AdminEditProduct(item: ProductType) {
   const {
@@ -43,81 +83,283 @@ export default function AdminEditProduct(item: ProductType) {
     getUrl()
   }, [obraz])
 
-  // Format the amount as a czk amount
-  let formatted
-  if (bezDPH != undefined) {
-    const amount: number = bezDPH
-    formatted = new Intl.NumberFormat("cs-CS", {
-      style: "currency",
-      currency: "CZK",
-    }).format(amount)
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      nazev,
+      kod,
+      bezDPH,
+      akce,
+      akceCena,
+      DPH,
+      dostupnost,
+      stav,
+      hmotnost,
+      obal,
+      obraz,
+      zobrazit,
+    },
+  })
+
+  console.log(form)
+
+  // 2. Define a submit handler.
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values)
   }
 
   return (
-    <div className="flex justify-center w-full flex-col items-center">
-      <div className="relative flex justify-center w-80 h-80 flex-col items-center">
-        {!loadingImage ? (
-          <>
-            {nazev && (
-              <Image
-                src={imageUrl}
-                alt={nazev}
-                fill={true}
-                style={{ objectFit: "cover" }}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    <Dialog>
+      <DialogTrigger asChild>
+        <div className="flex text-lg cursor-pointer justify-end ml-4 hover:underline">
+          <PiPencilSimpleThin />
+          <span className="ml-1 text-sm">upravit</span>
+        </div>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Upravit</DialogTitle>
+        </DialogHeader>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <ScrollArea className="h-[400px] w-full rounded-md border p-4">
+              <FormField
+                control={form.control}
+                name="nazev"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">Název</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Název"
+                        {...field}
+                        tabIndex={-1}
+                        className="mr-1"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            )}
-          </>
-        ) : (
-          <div role="status" className="w-full h-full animate-pulse">
-            <div className="flex items-center justify-center w-full h-full bg-gray-300 rounded">
-              <svg
-                className="w-10 h-10 text-gray-200"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 18"
-              >
-                <path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.775 4.757 1.546-1.887a1 1 0 0 1 1.618.1l2.541 4a1 1 0 0 1 .028 1.011Z" />
-              </svg>
-            </div>
-          </div>
-        )}
-      </div>
-      <div className="mt-6 w-80">
-        <div className="flex justify-between xl:text-lg">
-          <div className="flex">
-            <span className="relative bottom-1 mr-2 text-sky-700 text-2xl">
-              {stav === "mražené" ? <PiSnowflakeThin /> : <PiThermometerThin />}
-            </span>
-            <span>{stav}</span>
-          </div>
-          <div className="flex">
-            <span className="relative bottom-1 mr-2 text-2xl">
-              <PiPackageThin />
-            </span>
-            <span>{obal}</span>
-          </div>
-        </div>
-        <div className="my-2 lg:my-4 w-full text-lg text-center text-sky-700 font-semibold">
-          {formatted}{" "}
-          <span className="text-xs text-primary font-normal">bez DPH</span>
-        </div>
-        <div className="my-2 lg:my-4 w-full divide-y divide-solid">
-          <div className="flex justify-between w-full py-2">
-            <span>Objednací číslo:</span>
-            <span>{kod}</span>
-          </div>
-          <div className="flex justify-between w-full py-2">
-            <span>Dostupnost:</span>
-            <span>{dostupnost}</span>
-          </div>
-          <div className="flex justify-between w-full py-2">
-            <span>Hmotnost od-do:</span>
-            <span>{hmotnost}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+              <FormField
+                control={form.control}
+                name="kod"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">Kód</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Kód"
+                        {...field}
+                        tabIndex={-1}
+                        className="mr-1"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="bezDPH"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">
+                      Cena bez DPH
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Cena bez DPH"
+                        {...field}
+                        tabIndex={-1}
+                        className="mr-1"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="akce"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">Akce</FormLabel>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        tabIndex={-1}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="akceCena"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">Akční cena</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Akční cena"
+                        {...field}
+                        tabIndex={-1}
+                        className="mr-1"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="DPH"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">
+                      DPH produktu
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="DPH produktu"
+                        {...field}
+                        tabIndex={-1}
+                        className="mr-1"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="dostupnost"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">Dostupnost</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger tabIndex={-1} className="mr-1">
+                          <SelectValue placeholder="Vyberte z možností" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Ihned k odběru">
+                          Ihned k odběru
+                        </SelectItem>
+                        <SelectItem value="Nedostupné">Nedostupné</SelectItem>
+                        <SelectItem value="Skladem do týdne">
+                          Skladem do týdne
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="stav"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">Stav</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Stav"
+                        {...field}
+                        tabIndex={-1}
+                        className="mr-1"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="hmotnost"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">Hmotnost</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Hmotnost"
+                        {...field}
+                        tabIndex={-1}
+                        className="mr-1"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="obal"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">Obal</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Obal"
+                        {...field}
+                        tabIndex={-1}
+                        className="mr-1"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="obraz"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">Obrázek</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Obrázek"
+                        {...field}
+                        tabIndex={-1}
+                        className="mr-1"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="zobrazit"
+                render={({ field }) => (
+                  <FormItem className="flex items-center my-2">
+                    <FormLabel className="mt-2 mr-2 w-32">Zobrazit</FormLabel>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        tabIndex={-1}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </ScrollArea>
+            <Button type="submit">Uložit změny</Button>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   )
 }
